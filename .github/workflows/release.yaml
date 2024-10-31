@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - '.vscode/**'
+      - '.idea/**'
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  pay-rent-ng-contracts-validate:
+    name: Run pay-rent-ng-contracts release
+    secrets: inherit
+    uses: ./.github/workflows/pay-rent-ng-contracts-ci.yaml
+
+  pay-rent-ng-contracts-release:
+    name: Run pay-rent-ng-contracts release
+    secrets: inherit
+    uses: ./.github/workflows/pay-rent-ng-contracts-cd.yaml
+    needs: pay-rent-ng-contracts-validate
+
+  pay-rent-ng-frontend-validate:
+    name: Run pay-rent-ng-frontend release
+    secrets: inherit
+    uses: ./.github/workflows/pay-rent-ng-frontend-ci.yaml
+
+  pay-rent-ng-frontend-release:
+    name: Run pay-rent-ng-frontend release
+    secrets: inherit
+    uses: ./.github/workflows/pay-rent-ng-frontend-cd.yaml
+    needs: pay-rent-ng-frontend-validate

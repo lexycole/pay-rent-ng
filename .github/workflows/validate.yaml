@@ -1,0 +1,14 @@
+name: Pull Request validation
+
+on: [pull_request]
+
+
+jobs:
+  pay-rent-ng-contracts-ci:
+    name: Run pay-rent-ng-contracts validation
+    uses: ./.github/workflows/pay-rent-ng-contracts-ci.yaml
+
+  pay-rent-ng-frontend-ci:
+    name: Run pay-rent-ng-frontend validation
+    uses: ./.github/workflows/pay-rent-ng-frontend-ci.yaml
+
