@@ -1,60 +1,57 @@
-PayRentNG 🏠
+# PayRentNG 🏠
+
 A decentralized platform built on Algorand blockchain that streamlines rental payments and management in Nigeria. PayRentNG enables automated recurring payments for rent, making transactions transparent, secure, and hassle-free for both landlords and tenants.
-🌟 Features
-For Tenants
 
-🔄 Schedule automatic rent payments
-📱 Mobile-friendly dashboard
-📜 Digital payment receipts
-🔔 Payment reminders
-📊 Payment history tracking
-💰 Installment payment options
+## 🌟 Features
 
-For Landlords
+### For Tenants
+- 🔄 Schedule automatic rent payments
+- 📱 Mobile-friendly dashboard
+- 📜 Digital payment receipts
+- 🔔 Payment reminders
+- 📊 Payment history tracking
+- 💰 Installment payment options
 
-📈 Real-time payment tracking
-🏦 Automated rent collection
-📱 Mobile rent management
-📊 Financial reporting
-🔔 Instant payment notifications
-📜 Digital tenant agreements
+### For Landlords
+- 📈 Real-time payment tracking
+- 🏦 Automated rent collection
+- 📱 Mobile rent management
+- 📊 Financial reporting
+- 🔔 Instant payment notifications
+- 📜 Digital tenant agreements
 
-🛠 Tech Stack
+## 🛠 Tech Stack
 
-Frontend:
+- **Frontend:**
+  - Next.js 14
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - React Query
 
-Next.js 14
-TypeScript
-Tailwind CSS
-shadcn/ui
-React Query
+- **Blockchain:**
+  - Algorand SDK
+  - PyTeal
+  - Smart Contracts
 
+- **Backend:**
+  - Node.js
+  - Express
+  - MongoDB
+  - IPFS (for document storage)
 
-Blockchain:
+## 🚀 Getting Started
 
-Algorand SDK
-PyTeal
-Smart Contracts
+### Prerequisites
+- Node.js v18+
+- npm or yarn
+- Metamask wallet
+- Algorand wallet
+- Git
 
+### Installation
 
-Backend:
-
-Node.js
-Express
-MongoDB
-IPFS (for document storage)
-
-
-
-🚀 Getting Started
-Prerequisites
-
-Node.js v18+
-npm or yarn
-Metamask wallet
-Algorand wallet
-Git
-
-Installation
-
-Clone the repository
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/payrentng.git
+   cd payrentng
