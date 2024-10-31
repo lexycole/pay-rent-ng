@@ -1,13 +1,13 @@
 from pyteal import *
-from utils import upload_to_ipfs
 
-def user_onboarding_app():
+def subscription_packages_app():
     """
-    Smart contract for user onboarding and IUC registration on the Algorand blockchain.
+    Smart contract to manage subscription packages.
     """
     # Global state
     is_user_onboarded = Bytes("is_user_onboarded")
     iuc_to_ipfs_hash = Dict(TealType.bytes, TealType.bytes)
+    subscription_packages = Array(TealType.bytes)
 
     @Subroutine(TealType.none)
     def onboard_user(iuc: Bytes, wallet_address: Bytes):
@@ -31,12 +31,31 @@ def user_onboarding_app():
             [Int(1) == Int(1), Int(0)]
         )
 
+    @Subroutine(TealType.none)
+    def add_subscription_package(package_details: Bytes):
+        """
+        Subroutine to add a new subscription package.
+        """
+        return Seq(
+            subscription_packages.append(package_details),
+            Approve()
+        )
+
+    @Subroutine(TealType.bytes)
+    def get_subscription_packages():
+        """
+        Subroutine to get all available subscription packages.
+        """
+        return subscription_packages.load()
+
     program = Cond(
         [Txn.application_id() == Int(0), onboard_user(Txn.application_args[0], Txn.sender())],
-        [Txn.application_id() != Int(0), is_user_onboarded_check()]
+        [Txn.application_id() != Int(0), is_user_onboarded_check()],
+        [Txn.application_args[0] == Bytes("add_package"), add_subscription_package(Txn.application_args[1])],
+        [Txn.application_args[0] == Bytes("get_packages"), get_subscription_packages()]
     )
 
     return program
 
 if __name__ == "__main__":
-    print(compileTeal(user_onboarding_app(), Mode.Application, version=6))
+    print(compileTeal(subscription_packages_app(), Mode.Application, version=6))
