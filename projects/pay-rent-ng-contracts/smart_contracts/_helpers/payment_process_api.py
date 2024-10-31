@@ -1,6 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from pyteal import compileTeal, Mode
 from .payment_process_contract import payment_process_app
+from typing import Dict
 
 app = FastAPI()
 
@@ -56,6 +57,21 @@ def process_payment(iuc: str, package_index: int, is_algo: bool):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.websocket("/service_activation")
+async def service_activation(websocket: WebSocket):
+    """
+    Websocket endpoint to handle service activation.
+    """
+    await websocket.accept()
+    try:
+        while True:
+            event = await get_service_activation_event()
+            if event:
+                iuc = event["iuc"]
+                await websocket.send_json({"message": f"Service activated for IUC: {iuc}"})
+    except WebSocketDisconnect:
+        print("WebSocket connection closed")
+
 def deploy_contract(teal_code):
     """
     Deploy the smart contract to the Algorand blockchain.
@@ -90,3 +106,10 @@ def process_subscription_payment(contract_address, iuc, package_index, is_algo):
     """
     # Implementation details omitted for brevity
     pass
+
+async def get_service_activation_event() -> Dict:
+    """
+    Listen for the ServiceActivated event and return the event data.
+    """
+    # Implementation details omitted for brevity
+    return {"iuc": "123456"}

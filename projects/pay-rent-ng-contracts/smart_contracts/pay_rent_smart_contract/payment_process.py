@@ -3,7 +3,7 @@ from utils import transfer_algo, transfer_asa
 
 def payment_process_app():
     """
-    Smart contract to handle the payment process.
+    Smart contract to handle the payment process and service activation.
     """
     # Global state
     is_user_onboarded = Bytes("is_user_onboarded")
@@ -11,6 +11,9 @@ def payment_process_app():
     iuc_to_wallet = Dict(TealType.bytes, TealType.bytes)
     subscription_packages = Array(TealType.bytes)
     subscription_status = Dict(TealType.bytes, TealType.uint64)
+
+    # Event
+    ServiceActivated = Bytes("ServiceActivated")
 
     @Subroutine(TealType.none)
     def onboard_user(iuc: Bytes, wallet_address: Bytes):
@@ -66,6 +69,7 @@ def payment_process_app():
                transfer_algo(wallet_address, payment_amount),
                transfer_asa(wallet_address, payment_amount)),
             subscription_status.put(iuc, Int(1)),
+            Log(ServiceActivated),
             Approve()
         )
 
