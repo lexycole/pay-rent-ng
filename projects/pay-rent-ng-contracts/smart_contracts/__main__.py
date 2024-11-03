@@ -1,7 +1,7 @@
 import logging
 import sys
 from pathlib import Path
-
+import uvicorn
 from dotenv import load_dotenv
 
 from smart_contracts._helpers.build import build
@@ -54,6 +54,12 @@ def main(action: str, contract_name: str | None = None) -> None:
                 if contract.deploy:
                     logger.info(f"Deploying app {contract.name}")
                     deploy(app_spec_path, contract.deploy)
+        case "serve":
+            # Run FastAPI app directly via Uvicorn
+            logger.info("Starting FastAPI server...")
+            uvicorn.run("smart_contracts._helper.api:app", host="127.0.0.1", port=8000)
+
+
         case "all":
             for contract in filtered_contracts:
                 logger.info(f"Building app at {contract.path}")
