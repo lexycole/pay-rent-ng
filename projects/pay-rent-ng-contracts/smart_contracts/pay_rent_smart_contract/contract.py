@@ -2,20 +2,28 @@ from algopy.arc4 import ARC4Contract, Address, UInt512, BigUIntN
 from algopy import log, Txn, LocalState, subroutine, Bytes
 from typing import Literal
 
+# Hardcoded values
+SMART_CARD_NUMBER = "0982761542"
+ACCOUNT_ADDRESS = "YJI7KFSNWVJRAWW2Z7OB27PHU3AXD356YRDQVJSIZAWW32SWZ5VWRWAXZY"
+
 class StoreSmartCardContract(ARC4Contract):
     def __init__(self) -> None:
         # Define local state variables with `LocalState`
         self.smart_card_key = LocalState(UInt512)
-        self.sender_key = LocalState(Address)    # Store as Address type
-        self.account_key = LocalState(Address)   # Store as Address type
+        self.sender_key = LocalState(Address)
+        self.account_key = LocalState(Address)
 
     @subroutine
-    def store_smart_card_number(self, smart_card_number: UInt512, account_address: Address) -> bool:
+    def store_smart_card_number(self) -> bool:
         log("Starting to Store Smart Card Number")
-        sender_address = Address(Txn.sender)    # Convert Account to Address type
+        sender_address = Address(Txn.sender)
         log("Transaction Sender Address: " + str(sender_address))
 
-        # Store the converted address
+        # Convert hardcoded values to appropriate types
+        smart_card_number = UInt512(int(SMART_CARD_NUMBER))
+        account_address = Address(ACCOUNT_ADDRESS)
+
+        # Store the sender address
         self.sender_key[sender_address] = sender_address
         log("Sender Address Stored in Local State")
 
@@ -30,5 +38,6 @@ class StoreSmartCardContract(ARC4Contract):
         log("Storage of Smart Card Number Completed")
         return True
 
-
- 
+# Example usage
+contract = StoreSmartCardContract()
+result = contract.store_smart_card_number()
