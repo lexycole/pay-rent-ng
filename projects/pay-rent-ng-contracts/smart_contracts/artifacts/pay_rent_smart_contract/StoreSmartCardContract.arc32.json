@@ -1,0 +1,45 @@
+{
+    "hints": {},
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU3RvcmVTbWFydENhcmRDb250cmFjdC5hcHByb3ZhbF9wcm9ncmFtOgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgY2FsbHN1YiBfX2luaXRfXwoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICBjYWxsc3ViIF9fcHV5YV9hcmM0X3JvdXRlcl9fCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU3RvcmVTbWFydENhcmRDb250cmFjdC5fX2luaXRfXygpIC0+IHZvaWQ6Cl9faW5pdF9fOgogICAgcHJvdG8gMCAwCiAgICBwdXNoYnl0ZXMgIkluaXRpYWxpemVkIFN0b3JlU21hcnRDYXJkQ29udHJhY3Qgd2l0aCBsb2NhbCBzdGF0ZSB2YXJpYWJsZXMuIgogICAgbG9nCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU3RvcmVTbWFydENhcmRDb250cmFjdC5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBibnogX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUA2CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUA2CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGlzIGNyZWF0aW5nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDY6CiAgICBwdXNoaW50IDAgLy8gMAogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU3RvcmVTbWFydENhcmRDb250cmFjdC5jbGVhcl9zdGF0ZV9wcm9ncmFtOgogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgo="
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        },
+        "local": {
+            "num_byte_slices": 1,
+            "num_uints": 1
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {},
+            "reserved": {}
+        },
+        "local": {
+            "declared": {
+                "local": {
+                    "type": "bytes",
+                    "key": "local"
+                },
+                "local_with_metadata": {
+                    "type": "uint64",
+                    "key": "lwm",
+                    "descr": "Local with metadata"
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "StoreSmartCardContract",
+        "methods": [],
+        "networks": {}
+    },
+    "bare_call_config": {
+        "no_op": "CREATE"
+    }
+}

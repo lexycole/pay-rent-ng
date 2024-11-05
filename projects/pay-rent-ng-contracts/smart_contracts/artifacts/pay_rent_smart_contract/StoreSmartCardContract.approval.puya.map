@@ -1,0 +1,154 @@
+{
+  "version": 3,
+  "sources": [
+    "../../pay_rent_smart_contract/contract.py"
+  ],
+  "mappings": ";;;;;;;;;;;;;AAqCA;;;AAGY;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAJ;;AAJR;;;AAAA;;AAAA;;;AAAA;;AAAA;;;;;;;;;;AAAA;;AAAA",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.StoreSmartCardContract.approval_program",
+      "params": {},
+      "block": "smart_contracts.pay_rent_smart_contract.contract.StoreSmartCardContract.approval_program",
+      "stack_in": [],
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "3": {
+      "op": "bnz main_after_if_else@2",
+      "stack_out": []
+    },
+    "6": {
+      "callsub": "smart_contracts.pay_rent_smart_contract.contract.StoreSmartCardContract.__init__",
+      "op": "callsub __init__"
+    },
+    "9": {
+      "block": "main_after_if_else@2",
+      "stack_in": [],
+      "callsub": "smart_contracts.pay_rent_smart_contract.contract.StoreSmartCardContract.__puya_arc4_router__",
+      "op": "callsub __puya_arc4_router__",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "12": {
+      "op": "return",
+      "stack_out": []
+    },
+    "13": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.StoreSmartCardContract.__init__",
+      "params": {},
+      "block": "__init__",
+      "stack_in": [],
+      "op": "proto 0 0"
+    },
+    "16": {
+      "op": "pushbytes \"Initialized StoreSmartCardContract with local state variables.\"",
+      "defined_out": [
+        "\"Initialized StoreSmartCardContract with local state variables.\""
+      ],
+      "stack_out": [
+        "\"Initialized StoreSmartCardContract with local state variables.\""
+      ]
+    },
+    "80": {
+      "op": "log",
+      "stack_out": []
+    },
+    "81": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "82": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.StoreSmartCardContract.__puya_arc4_router__",
+      "params": {},
+      "block": "__puya_arc4_router__",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "85": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "87": {
+      "op": "bnz __puya_arc4_router___after_if_else@6",
+      "stack_out": []
+    },
+    "90": {
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "92": {
+      "op": "bnz __puya_arc4_router___after_if_else@6",
+      "stack_out": []
+    },
+    "95": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "97": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "98": {
+      "op": "assert // is creating",
+      "stack_out": []
+    },
+    "99": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "101": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "102": {
+      "block": "__puya_arc4_router___after_if_else@6",
+      "stack_in": [],
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "104": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}
