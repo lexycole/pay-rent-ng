@@ -3,26 +3,63 @@
 # from algopy.arc4 import ARC4Contract, Address, UInt512, BigUIntN
 # from algopy import log, Txn, LocalState, subroutine, Bytes, Account, Bytes, UInt64, String
 
-from algopy import ARC4Contract, arc4, Application, Account
+from algopy import ARC4Contract, arc4, Account, log
 
 class SmartCardContract(ARC4Contract):
-    SMART_CARD_NUMBER: arc4.String
+    # Declare a class-level global byte slice
+    smart_card_number: arc4.String
 
-    @arc4.abimethod(allow_actions=["OptIn"])
+    @arc4.abimethod()
     def init(self) -> None:
         """Initialize the smart card number during contract creation."""
-        self.SMART_CARD_NUMBER = arc4.String("12345678901")
+        # Initialize with an empty string instead of a hardcoded value
+        self.smart_card_number = arc4.String("")
+
+    @arc4.abimethod
+    def set_smart_card_number(self, smart_card_number: arc4.String) -> None:
+        """Sets the smart card number."""
+        self.smart_card_number = smart_card_number
 
     @arc4.abimethod
     def get_smart_card_number(self) -> arc4.String:
-        """Returns the hardcoded smart card number."""
-        return self.SMART_CARD_NUMBER
+        """Returns the smart card number."""
+        return self.smart_card_number
 
     @arc4.abimethod
-    def save_smart_card_number(self) -> arc4.String:
-        """Saves the hardcoded smart card number."""
-        self.SMART_CARD_NUMBER = arc4.String("12345678901")
-        return arc4.String("Smart card number saved successfully.")
+    def fetch_smart_card_number(self) -> arc4.String:
+        """
+        Fetches the saved smart card number from the blockchain.
+        """
+        return self.smart_card_number
+
+
+# class SmartCardContract(ARC4Contract):
+#     # Declare a class-level global byte slice
+#     smart_card_number: arc4.String
+
+#     @arc4.abimethod()
+#     def init(self) -> None:
+#         """Initialize the smart card number during contract creation."""
+#         # Use the global bytes slice directly
+#         self.smart_card_number = arc4.String("12345678901")
+
+
+#     @arc4.abimethod
+#     def get_smart_card_number(self) -> arc4.String:
+#         """Returns the smart card number."""
+#         return self.smart_card_number
+
+#     @arc4.abimethod
+#     def fetch_smart_card_number(self) -> arc4.String:
+#         """
+#         Fetches the saved smart card number from the blockchain.
+#         """
+#         return self.smart_card_number
+
+
+
+
+
 
     # @arc4.abimethod
     # def get_app_id(self, app_a:Application) -> arc4.UInt64:

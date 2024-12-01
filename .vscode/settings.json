@@ -1,5 +1,8 @@
 {
   // Disabled due to matangover.mypy extension not supporting monorepos
   // To be addressed as part of https://github.com/matangover/mypy-vscode/issues/82
-  "mypy.enabled": false
+  "mypy.enabled": false,
+  "python.analysis.extraPaths": [
+    "./projects/pay-rent-ng-contracts/smart_contracts/pay_rent_smart_contract"
+  ]
 }

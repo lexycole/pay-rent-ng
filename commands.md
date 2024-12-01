@@ -1,10 +1,7 @@
-uvicorn smart_contracts._helper.api:app --reload --port 8000
-
 python -m smart_contracts serve
 
-python -m smart_contracts build pay_rent_smart_contract
 
-python -m smart_contracts deploy pay_rent_smart_contract
+python -m smart_contracts. deploy pay_rent_smart_contract
 
 <!-- CONTRACT CLASS -->
 class HelloWorld (ARC4Contract):
@@ -30,13 +27,10 @@ Application Address: SW4BTZGCCNMSDYSANRLKFQOZNYRKH4B7J6DNSEUAYPSRGOYZRGKQEAW5EY
 (pay-rent-ng-contracts-py3.13) mac@MACs-MacBook-Pro pay-rent-ng-contracts % 
 
 
-uvicorn smart_contracts._helper.api:app --reload
 
 
 from pay_rent_ng.smart_contracts.__main__ import main
 
-
-uvicorn smart_contracts._helpers.api:app --reload
 
 import sys
 sys.path.append('/Users/mac/Algorand, native features and Using algokit utils to interact with the chain/PayRentNG/real/pay-rent-ng/projects/pay-rent-ng-contracts')
@@ -85,3 +79,10 @@ build again
 to get the arc32.json 
 upload to lora and follow the youtube to deploy.
  
+
+ algokit project run build -- pay-rent-ng-contracts
+
+ poetry run python -m smart_contracts build
+
+
+ poetry run python -m smart_contracts deploy

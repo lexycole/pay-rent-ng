@@ -25,7 +25,12 @@ _APP_SPEC_JSON = r"""{
     "hints": {
         "init()void": {
             "call_config": {
-                "opt_in": "CALL"
+                "no_op": "CALL"
+            }
+        },
+        "set_smart_card_number(string)void": {
+            "call_config": {
+                "no_op": "CALL"
             }
         },
         "get_smart_card_number()string": {
@@ -33,14 +38,14 @@ _APP_SPEC_JSON = r"""{
                 "no_op": "CALL"
             }
         },
-        "save_smart_card_number()string": {
+        "fetch_smart_card_number()string": {
             "call_config": {
                 "no_op": "CALL"
             }
         }
     },
     "source": {
-        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU21hcnRDYXJkQ29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbToKICAgIGludGNibG9jayAxIDAKICAgIGJ5dGVjYmxvY2sgIlNNQVJUX0NBUkRfTlVNQkVSIiAweDE1MWY3Yzc1IDB4MDAwYjMxMzIzMzM0MzUzNjM3MzgzOTMwMzEKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5wYXlfcmVudF9zbWFydF9jb250cmFjdC5jb250cmFjdC5TbWFydENhcmRDb250cmFjdC5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdANwogICAgcHVzaGJ5dGVzcyAweDgzZjE0NzQ4IDB4ZGM0OGNkY2EgMHgyNjIyZmE1MSAvLyBtZXRob2QgImluaXQoKXZvaWQiLCBtZXRob2QgImdldF9zbWFydF9jYXJkX251bWJlcigpc3RyaW5nIiwgbWV0aG9kICJzYXZlX3NtYXJ0X2NhcmRfbnVtYmVyKClzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBfX3B1eWFfYXJjNF9yb3V0ZXJfX19pbml0X3JvdXRlQDIgX19wdXlhX2FyYzRfcm91dGVyX19fZ2V0X3NtYXJ0X2NhcmRfbnVtYmVyX3JvdXRlQDMgX19wdXlhX2FyYzRfcm91dGVyX19fc2F2ZV9zbWFydF9jYXJkX251bWJlcl9yb3V0ZUA0CiAgICBpbnRjXzEgLy8gMAogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19pbml0X3JvdXRlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gT3B0SW4KICAgID09CiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBPcHRJbgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGluaXQKICAgIGludGNfMCAvLyAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2dldF9zbWFydF9jYXJkX251bWJlcl9yb3V0ZUAzOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldF9zbWFydF9jYXJkX251bWJlcgogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fc2F2ZV9zbWFydF9jYXJkX251bWJlcl9yb3V0ZUA0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIHNhdmVfc21hcnRfY2FyZF9udW1iZXIKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX2JhcmVfcm91dGluZ0A3OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAMTEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDExOgogICAgaW50Y18xIC8vIDAKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5wYXlfcmVudF9zbWFydF9jb250cmFjdC5jb250cmFjdC5TbWFydENhcmRDb250cmFjdC5pbml0KCkgLT4gdm9pZDoKaW5pdDoKICAgIHByb3RvIDAgMAogICAgYnl0ZWNfMCAvLyAiU01BUlRfQ0FSRF9OVU1CRVIiCiAgICBieXRlY18yIC8vIDB4MDAwYjMxMzIzMzM0MzUzNjM3MzgzOTMwMzEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU21hcnRDYXJkQ29udHJhY3QuZ2V0X3NtYXJ0X2NhcmRfbnVtYmVyKCkgLT4gYnl0ZXM6CmdldF9zbWFydF9jYXJkX251bWJlcjoKICAgIHByb3RvIDAgMQogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gIlNNQVJUX0NBUkRfTlVNQkVSIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLlNNQVJUX0NBUkRfTlVNQkVSIGV4aXN0cwogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLnBheV9yZW50X3NtYXJ0X2NvbnRyYWN0LmNvbnRyYWN0LlNtYXJ0Q2FyZENvbnRyYWN0LnNhdmVfc21hcnRfY2FyZF9udW1iZXIoKSAtPiBieXRlczoKc2F2ZV9zbWFydF9jYXJkX251bWJlcjoKICAgIHByb3RvIDAgMQogICAgYnl0ZWNfMCAvLyAiU01BUlRfQ0FSRF9OVU1CRVIiCiAgICBieXRlY18yIC8vIDB4MDAwYjMxMzIzMzM0MzUzNjM3MzgzOTMwMzEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBwdXNoYnl0ZXMgMHgwMDI1NTM2ZDYxNzI3NDIwNjM2MTcyNjQyMDZlNzU2ZDYyNjU3MjIwNzM2MTc2NjU2NDIwNzM3NTYzNjM2NTczNzM2Njc1NmM2Yzc5MmUKICAgIHJldHN1Ygo=",
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU21hcnRDYXJkQ29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbToKICAgIGludGNibG9jayAxIDAKICAgIGJ5dGVjYmxvY2sgInNtYXJ0X2NhcmRfbnVtYmVyIiAweDE1MWY3Yzc1CiAgICBjYWxsc3ViIF9fcHV5YV9hcmM0X3JvdXRlcl9fCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU21hcnRDYXJkQ29udHJhY3QuX19wdXlhX2FyYzRfcm91dGVyX18oKSAtPiB1aW50NjQ6Cl9fcHV5YV9hcmM0X3JvdXRlcl9fOgogICAgcHJvdG8gMCAxCiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogX19wdXlhX2FyYzRfcm91dGVyX19fYmFyZV9yb3V0aW5nQDgKICAgIHB1c2hieXRlc3MgMHg4M2YxNDc0OCAweGFkYzRiMmJmIDB4ZGM0OGNkY2EgMHhlYTQ2ODA2ZCAvLyBtZXRob2QgImluaXQoKXZvaWQiLCBtZXRob2QgInNldF9zbWFydF9jYXJkX251bWJlcihzdHJpbmcpdm9pZCIsIG1ldGhvZCAiZ2V0X3NtYXJ0X2NhcmRfbnVtYmVyKClzdHJpbmciLCBtZXRob2QgImZldGNoX3NtYXJ0X2NhcmRfbnVtYmVyKClzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBfX3B1eWFfYXJjNF9yb3V0ZXJfX19pbml0X3JvdXRlQDIgX19wdXlhX2FyYzRfcm91dGVyX19fc2V0X3NtYXJ0X2NhcmRfbnVtYmVyX3JvdXRlQDMgX19wdXlhX2FyYzRfcm91dGVyX19fZ2V0X3NtYXJ0X2NhcmRfbnVtYmVyX3JvdXRlQDQgX19wdXlhX2FyYzRfcm91dGVyX19fZmV0Y2hfc21hcnRfY2FyZF9udW1iZXJfcm91dGVANQogICAgaW50Y18xIC8vIDAKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19faW5pdF9yb3V0ZUAyOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGluaXQKICAgIGludGNfMCAvLyAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX3NldF9zbWFydF9jYXJkX251bWJlcl9yb3V0ZUAzOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBjYWxsc3ViIHNldF9zbWFydF9jYXJkX251bWJlcgogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fZ2V0X3NtYXJ0X2NhcmRfbnVtYmVyX3JvdXRlQDQ6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgZ2V0X3NtYXJ0X2NhcmRfbnVtYmVyCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19mZXRjaF9zbWFydF9jYXJkX251bWJlcl9yb3V0ZUA1OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGZldGNoX3NtYXJ0X2NhcmRfbnVtYmVyCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdAODoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDEyCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYWZ0ZXJfaWZfZWxzZUAxMjoKICAgIGludGNfMSAvLyAwCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU21hcnRDYXJkQ29udHJhY3QuaW5pdCgpIC0+IHZvaWQ6CmluaXQ6CiAgICBwcm90byAwIDAKICAgIGJ5dGVjXzAgLy8gInNtYXJ0X2NhcmRfbnVtYmVyIgogICAgcHVzaGJ5dGVzIDB4MDAwMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5wYXlfcmVudF9zbWFydF9jb250cmFjdC5jb250cmFjdC5TbWFydENhcmRDb250cmFjdC5zZXRfc21hcnRfY2FyZF9udW1iZXIoc21hcnRfY2FyZF9udW1iZXI6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfc21hcnRfY2FyZF9udW1iZXI6CiAgICBwcm90byAxIDAKICAgIGJ5dGVjXzAgLy8gInNtYXJ0X2NhcmRfbnVtYmVyIgogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLnBheV9yZW50X3NtYXJ0X2NvbnRyYWN0LmNvbnRyYWN0LlNtYXJ0Q2FyZENvbnRyYWN0LmdldF9zbWFydF9jYXJkX251bWJlcigpIC0+IGJ5dGVzOgpnZXRfc21hcnRfY2FyZF9udW1iZXI6CiAgICBwcm90byAwIDEKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJzbWFydF9jYXJkX251bWJlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zbWFydF9jYXJkX251bWJlciBleGlzdHMKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5wYXlfcmVudF9zbWFydF9jb250cmFjdC5jb250cmFjdC5TbWFydENhcmRDb250cmFjdC5mZXRjaF9zbWFydF9jYXJkX251bWJlcigpIC0+IGJ5dGVzOgpmZXRjaF9zbWFydF9jYXJkX251bWJlcjoKICAgIHByb3RvIDAgMQogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gInNtYXJ0X2NhcmRfbnVtYmVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnNtYXJ0X2NhcmRfbnVtYmVyIGV4aXN0cwogICAgcmV0c3ViCg==",
         "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMucGF5X3JlbnRfc21hcnRfY29udHJhY3QuY29udHJhY3QuU21hcnRDYXJkQ29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbToKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
     },
     "state": {
@@ -56,9 +61,9 @@ _APP_SPEC_JSON = r"""{
     "schema": {
         "global": {
             "declared": {
-                "SMART_CARD_NUMBER": {
+                "smart_card_number": {
                     "type": "bytes",
-                    "key": "SMART_CARD_NUMBER"
+                    "key": "smart_card_number"
                 }
             },
             "reserved": {}
@@ -80,20 +85,33 @@ _APP_SPEC_JSON = r"""{
                 "desc": "Initialize the smart card number during contract creation."
             },
             {
+                "name": "set_smart_card_number",
+                "args": [
+                    {
+                        "type": "string",
+                        "name": "smart_card_number"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                },
+                "desc": "Sets the smart card number."
+            },
+            {
                 "name": "get_smart_card_number",
                 "args": [],
                 "returns": {
                     "type": "string"
                 },
-                "desc": "Returns the hardcoded smart card number."
+                "desc": "Returns the smart card number."
             },
             {
-                "name": "save_smart_card_number",
+                "name": "fetch_smart_card_number",
                 "args": [],
                 "returns": {
                     "type": "string"
                 },
-                "desc": "Saves the hardcoded smart card number."
+                "desc": "Fetches the saved smart card number from the blockchain."
             }
         ],
         "networks": {}
@@ -176,8 +194,28 @@ def _convert_deploy_args(
 
 
 @dataclasses.dataclass(kw_only=True)
+class InitArgs(_ArgsBase[None]):
+    """Initialize the smart card number during contract creation."""
+
+    @staticmethod
+    def method() -> str:
+        return "init()void"
+
+
+@dataclasses.dataclass(kw_only=True)
+class SetSmartCardNumberArgs(_ArgsBase[None]):
+    """Sets the smart card number."""
+
+    smart_card_number: str
+
+    @staticmethod
+    def method() -> str:
+        return "set_smart_card_number(string)void"
+
+
+@dataclasses.dataclass(kw_only=True)
 class GetSmartCardNumberArgs(_ArgsBase[str]):
-    """Returns the hardcoded smart card number."""
+    """Returns the smart card number."""
 
     @staticmethod
     def method() -> str:
@@ -185,21 +223,12 @@ class GetSmartCardNumberArgs(_ArgsBase[str]):
 
 
 @dataclasses.dataclass(kw_only=True)
-class SaveSmartCardNumberArgs(_ArgsBase[str]):
-    """Saves the hardcoded smart card number."""
+class FetchSmartCardNumberArgs(_ArgsBase[str]):
+    """Fetches the saved smart card number from the blockchain."""
 
     @staticmethod
     def method() -> str:
-        return "save_smart_card_number()string"
-
-
-@dataclasses.dataclass(kw_only=True)
-class InitArgs(_ArgsBase[None]):
-    """Initialize the smart card number during contract creation."""
-
-    @staticmethod
-    def method() -> str:
-        return "init()void"
+        return "fetch_smart_card_number()string"
 
 
 class ByteReader:
@@ -225,7 +254,7 @@ class ByteReader:
 
 class GlobalState:
     def __init__(self, data: dict[bytes, bytes | int]):
-        self.SMART_CARD_NUMBER = ByteReader(typing.cast(bytes, data.get(b"SMART_CARD_NUMBER")))
+        self.smart_card_number = ByteReader(typing.cast(bytes, data.get(b"smart_card_number")))
 
 
 @dataclasses.dataclass(kw_only=True)
@@ -259,12 +288,58 @@ class Composer:
     def execute(self) -> AtomicTransactionResponse:
         return self.app_client.execute_atc(self.atc)
 
+    def init(
+        self,
+        *,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Initialize the smart card number during contract creation.
+        
+        Adds a call to `init()void` ABI method
+        
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        args = InitArgs()
+        self.app_client.compose_call(
+            self.atc,
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return self
+
+    def set_smart_card_number(
+        self,
+        *,
+        smart_card_number: str,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> "Composer":
+        """Sets the smart card number.
+        
+        Adds a call to `set_smart_card_number(string)void` ABI method
+        
+        :param str smart_card_number: The `smart_card_number` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns Composer: This Composer instance"""
+
+        args = SetSmartCardNumberArgs(
+            smart_card_number=smart_card_number,
+        )
+        self.app_client.compose_call(
+            self.atc,
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return self
+
     def get_smart_card_number(
         self,
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
-        """Returns the hardcoded smart card number.
+        """Returns the smart card number.
         
         Adds a call to `get_smart_card_number()string` ABI method
         
@@ -280,19 +355,19 @@ class Composer:
         )
         return self
 
-    def save_smart_card_number(
+    def fetch_smart_card_number(
         self,
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> "Composer":
-        """Saves the hardcoded smart card number.
+        """Fetches the saved smart card number from the blockchain.
         
-        Adds a call to `save_smart_card_number()string` ABI method
+        Adds a call to `fetch_smart_card_number()string` ABI method
         
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns Composer: This Composer instance"""
 
-        args = SaveSmartCardNumberArgs()
+        args = FetchSmartCardNumberArgs()
         self.app_client.compose_call(
             self.atc,
             call_abi_method=args.method(),
@@ -317,27 +392,6 @@ class Composer:
             self.atc,
             call_abi_method=False,
             transaction_parameters=_convert_create_transaction_parameters(transaction_parameters, on_complete),
-        )
-        return self
-
-    def opt_in_init(
-        self,
-        *,
-        transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> "Composer":
-        """Initialize the smart card number during contract creation.
-        
-        Adds a call to `init()void` ABI method
-        
-        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns Composer: This Composer instance"""
-
-        args = InitArgs()
-        self.app_client.compose_opt_in(
-            self.atc,
-            call_abi_method=args.method(),
-            transaction_parameters=_convert_transaction_parameters(transaction_parameters),
-            **_as_dict(args, convert_all=True),
         )
         return self
 
@@ -487,12 +541,56 @@ class SmartCardContractClient:
         state = typing.cast(dict[bytes, bytes | int], self.app_client.get_global_state(raw=True))
         return GlobalState(state)
 
+    def init(
+        self,
+        *,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """Initialize the smart card number during contract creation.
+        
+        Calls `init()void` ABI method
+        
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
+
+        args = InitArgs()
+        result = self.app_client.call(
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return result
+
+    def set_smart_card_number(
+        self,
+        *,
+        smart_card_number: str,
+        transaction_parameters: algokit_utils.TransactionParameters | None = None,
+    ) -> algokit_utils.ABITransactionResponse[None]:
+        """Sets the smart card number.
+        
+        Calls `set_smart_card_number(string)void` ABI method
+        
+        :param str smart_card_number: The `smart_card_number` ABI parameter
+        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
+        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
+
+        args = SetSmartCardNumberArgs(
+            smart_card_number=smart_card_number,
+        )
+        result = self.app_client.call(
+            call_abi_method=args.method(),
+            transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
+            **_as_dict(args, convert_all=True),
+        )
+        return result
+
     def get_smart_card_number(
         self,
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> algokit_utils.ABITransactionResponse[str]:
-        """Returns the hardcoded smart card number.
+        """Returns the smart card number.
         
         Calls `get_smart_card_number()string` ABI method
         
@@ -507,19 +605,19 @@ class SmartCardContractClient:
         )
         return result
 
-    def save_smart_card_number(
+    def fetch_smart_card_number(
         self,
         *,
         transaction_parameters: algokit_utils.TransactionParameters | None = None,
     ) -> algokit_utils.ABITransactionResponse[str]:
-        """Saves the hardcoded smart card number.
+        """Fetches the saved smart card number from the blockchain.
         
-        Calls `save_smart_card_number()string` ABI method
+        Calls `fetch_smart_card_number()string` ABI method
         
         :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
         :returns algokit_utils.ABITransactionResponse[str]: The result of the transaction"""
 
-        args = SaveSmartCardNumberArgs()
+        args = FetchSmartCardNumberArgs()
         result = self.app_client.call(
             call_abi_method=args.method(),
             transaction_parameters=_convert_call_transaction_parameters(transaction_parameters),
@@ -542,26 +640,6 @@ class SmartCardContractClient:
         result = self.app_client.create(
             call_abi_method=False,
             transaction_parameters=_convert_create_transaction_parameters(transaction_parameters, on_complete),
-        )
-        return result
-
-    def opt_in_init(
-        self,
-        *,
-        transaction_parameters: algokit_utils.TransactionParameters | None = None,
-    ) -> algokit_utils.ABITransactionResponse[None]:
-        """Initialize the smart card number during contract creation.
-        
-        Calls `init()void` ABI method
-        
-        :param algokit_utils.TransactionParameters transaction_parameters: (optional) Additional transaction parameters
-        :returns algokit_utils.ABITransactionResponse[None]: The result of the transaction"""
-
-        args = InitArgs()
-        result = self.app_client.opt_in(
-            call_abi_method=args.method(),
-            transaction_parameters=_convert_transaction_parameters(transaction_parameters),
-            **_as_dict(args, convert_all=True),
         )
         return result
 

@@ -5,16 +5,18 @@ import json
 import os
 import base64
 import algokit_utils
+import base64
+import logging
+import os
+import traceback
+from typing import List
 from fastapi import FastAPI, HTTPException, Query
 from algosdk.v2client import algod
 from algosdk.v2client.indexer import IndexerClient
 from algosdk.transaction import Transaction, SignedTransaction
 from dotenv import load_dotenv
 from algosdk import mnemonic, transaction
-from algosdk import transaction
-from algosdk.v2client import algod
-
-
+from pydantic import BaseModel
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)-10s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -25,7 +27,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Smart Contract API"}
+    return {"message": "Pay rent Smart Contract API"}
 
 # Configure Algorand clients
 def get_algod_client():
@@ -102,30 +104,6 @@ def check_application_exists(algod_client, app_id):
         return False
 
 
-# Usage
-# diagnose_clear_state(smart_contract_client, algod_client, sender_address)
-
-
-# def activate_account_localnet(algorand_client, sender_address):
-#     # Use AlgoKit to automatically handle online registration
-#     algokit_utils.ensure_funded(
-#         algorand_client,
-#         {
-#             "sender": sender_address,
-#             "receiver": sender_address,
-#             "amount": algokit_utils.get_min_balance(algorand_client, sender_address)
-#         }
-#     )
-    
-#     # Automatically brings the account online if needed
-#     algokit_utils.make_pay_txn(
-#         algorand_client,
-#         {
-#             "sender": "FBA3RUWOUUEOCMECZF7SXSUDRMROT3BI4UPWLUQZ4OYGSFTI5TCKYSXDWA",
-#             "receiver": "SW4BTZGCCNMSDYSANRLKFQOZNYRKH4B7J6DNSEUAYPSRGOYZRGKQEAW5EY",
-#             "amount": 0  # Zero-amount transaction
-#         }
-#     )
 
 def reactivate_account(algod_client, sender_address, private_key):
     # Create a no-op transaction to bring the account online
@@ -153,7 +131,7 @@ def reactivate_account(algod_client, sender_address, private_key):
 
 def fund_account(algod_client, sender_address, amount):
     # Use the most funded account from LocalNet
-    funded_address = "FBA3RUWOUUEOCMECZF7SXSUDRMROT3BI4UPWLUQZ4OYGSFTI5TCKYSXDWA"
+    funded_address = os.getenv("DEPLOYER_ADDRESS")
     
     # Load the mnemonic from environment or a secure method
     funded_mnemonic = os.getenv("DEPLOYER_MNEMONIC")
@@ -193,8 +171,6 @@ def fund_account(algod_client, sender_address, amount):
         logger.error(f"Error funding account: {e}")
         raise
 
-# In your .env file, add:
-# FUNDED_ACCOUNT_MNEMONIC=your_mnemonic_here
 
 def reactivate_and_fund(algod_client, sender_address, private_key, fund_amount):
     # Log the addresses for transparency
@@ -216,7 +192,6 @@ def reactivate_and_fund(algod_client, sender_address, private_key, fund_amount):
         logger.error(f"Funding failed: {e}")
         raise
 
-# FastAPI endpoint
 @app.post("/reactivate-and-fund/")
 async def handle_reactivate_and_fund(
     address: str = Query(..., description="The address of the account to reactivate and fund"),
@@ -265,14 +240,6 @@ def comprehensive_account_check(algod_client, address):
         logger.info(f"Account Verification Error: {e}")
         return None
 
-# In your FastAPI route or separate script
-# algod_client = get_algod_client()
-# comprehensive_account_check(algod_client, sender_address)
-# # Reactivate account
-# reactivate_account(algod_client, sender_address, private_key)
-# # Fund account
-# fund_account(algod_client, sender_address, private_key, 1_000_000) 
-
 
 # Import the client dynamically
 from smart_contracts.artifacts.pay_rent_smart_contract.smart_card_contract_client import (
@@ -295,7 +262,7 @@ async def get_smart_card_number():
         indexer_client = get_indexer_client()
 
         # Get deployer credentials from environment
-        sender_address = "FBA3RUWOUUEOCMECZF7SXSUDRMROT3BI4UPWLUQZ4OYGSFTI5TCKYSXDWA"
+        sender_address = os.getenv("DEPLOYER_ADDRESS")
         sender_mnemonic_str = os.getenv("DEPLOYER_MNEMONIC")
         app_id_from_env = os.getenv("APP_ID")
 
@@ -321,31 +288,144 @@ async def get_smart_card_number():
 
         # Check if the application exists
         app_id = int(app_id_from_env)
-        if not check_application_exists(algod_client, app_id):
-            raise HTTPException(status_code=404, detail=f"Application with ID {app_id} does not exist.")
-
+        app_info = algod_client.application_info(app_id)
 
         # Create a signer
         signer = create_signer(private_key)
-        
-        # Initialize the app client
+        logger.info(f"Signer created: {signer}")
+
+        # Initialize the app client BEFORE any initialization attempts
         app_client = SmartCardContractClient(
             algod_client,
-            app_id=int(app_id_from_env),  # Convert to int
+            app_id=app_id,
             signer=signer,
             indexer_client=indexer_client
         )
 
-        # Fetch the smart card number
-        smart_card_number = app_client.get_smart_card_number()
+        # Check for global state (graceful handling)
+        global_state = app_info.get('params', {}).get('global-state', None)
         
+        # Initialize the app if needed
+        if not global_state:
+            logger.info("Global state not found, initializing the application.")
+            
+            try:
+                # Use the app client to initialize
+                init_txn = app_client.init()
+                logger.info(f"Initialization transaction: {init_txn}")
+                
+                # Wait for transaction confirmation
+                transaction.wait_for_confirmation(algod_client, init_txn.tx_id)
+                
+                # Refresh app info after initialization
+                app_info = algod_client.application_info(app_id)
+            except Exception as init_error:
+                logger.error(f"Initialization error: {init_error}")
+                raise
+
+        # More verbose logging
+        logger.info(f"Attempting to fetch smart card number for app ID: {app_id}")
+
+        # Fetch the smart card number with additional error handling
+        try:
+            smart_card_number = app_client.fetch_smart_card_number()
+            logger.info(f"Successfully fetched smart card number: {smart_card_number}")
+        except Exception as fetch_error:
+            logger.error(f"Error in fetch_smart_card_number: {fetch_error}")
+            raise
+
         return {"smart_card_number": smart_card_number}
     
     except Exception as e:
+        error_trace = traceback.format_exc()
+        logger.error(f"Detailed error: {error_trace}")
         logger.error(f"Error fetching smart card number: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
+import logging
+import json
+import os
+import base64
+import algokit_utils
+import traceback
+from typing import List
+from fastapi import FastAPI, HTTPException, Query
+from algosdk.v2client import algod
+from algosdk.v2client.indexer import IndexerClient
+from algosdk.transaction import Transaction, SignedTransaction
+from dotenv import load_dotenv
+from algosdk import mnemonic, transaction
+from pydantic import BaseModel
 
+
+@app.post("/set-smart-card-number")
+async def set_smart_card_number(smart_card_number: str = Query(..., description="Smart Card Number to set")):
+    try:
+        # Get Algorand clients
+        algod_client = get_algod_client()
+        indexer_client = get_indexer_client()
+
+        # Get deployer credentials from environment
+        sender_address = os.getenv("DEPLOYER_ADDRESS")
+        sender_mnemonic_str = os.getenv("DEPLOYER_MNEMONIC")
+        app_id_from_env = os.getenv("APP_ID")
+
+        # Validate environment variables
+        if not sender_address:
+            raise ValueError("DEPLOYER_ADDRESS is not set")
+        if not sender_mnemonic_str:
+            raise ValueError("DEPLOYER_MNEMONIC is not set")
+        if not app_id_from_env:
+            raise ValueError("APP_ID is not set")
+
+        # Create deployer account
+        private_key = mnemonic.to_private_key(sender_mnemonic_str)
+        deployer = algokit_utils.Account(
+            address=sender_address,
+            private_key=private_key
+        )
+
+        # Check if the application exists
+        app_id = int(app_id_from_env)
+        
+        # Create a signer
+        signer = create_signer(private_key)
+
+        # Initialize the app client
+        app_client = SmartCardContractClient(
+            algod_client,
+            app_id=app_id,
+            signer=signer,
+            indexer_client=indexer_client
+        )
+
+        # Log the input smart card number
+        logger.info(f"Received smart card number: {smart_card_number}")
+
+        # Validate smart card number (optional: add your validation logic)
+        if not smart_card_number or len(smart_card_number) < 5:
+            raise ValueError("Invalid smart card number")
+
+        # Call the contract method to set smart card number
+        # You'll need to adjust this based on how your contract client is generated
+        set_txn = app_client.set_smart_card_number(smart_card_number=smart_card_number)
+        
+        logger.info(f"Smart card number set transaction: {set_txn}")
+
+        # Wait for transaction confirmation
+        transaction.wait_for_confirmation(algod_client, set_txn.tx_id)
+
+        return {
+            "status": "success", 
+            "message": "Smart card number set successfully",
+            "transaction_id": set_txn.tx_id
+        }
+    
+    except Exception as e:
+        error_trace = traceback.format_exc()
+        logger.error(f"Detailed error: {error_trace}")
+        logger.error(f"Error setting smart card number: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 
 def check_balance_detailed(algod_client, address):
     try:
@@ -371,7 +451,6 @@ def check_balance_detailed(algod_client, address):
         return None
 
 
-
 @app.post("/send-algos/")
 async def send_algos(
     recipient_address: str = Query(..., description="The recipient's Algorand address"),
@@ -383,7 +462,7 @@ async def send_algos(
 
         # Get deployer credentials from environment
         sender_mnemonic_str = os.getenv("DEPLOYER_MNEMONIC")
-        sender_address = "FBA3RUWOUUEOCMECZF7SXSUDRMROT3BI4UPWLUQZ4OYGSFTI5TCKYSXDWA"
+        sender_address = os.getenv("DEPLOYER_ADDRESS")
 
         # Create deployer account
         private_key = mnemonic.to_private_key(sender_mnemonic_str)
@@ -427,13 +506,6 @@ async def send_algos(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-import base64
-import logging
-from algosdk import transaction, mnemonic
-from algosdk.v2client import algod
-import os
-
-logger = logging.getLogger(__name__)
 
 def generate_participation_keys():
     """
@@ -574,19 +646,6 @@ async def handle_bring_account_online():
         raise HTTPException(status_code=500, detail=str(e))
     
 
-# @app.get("/check-balance/{address}")
-# async def check_balance(address: str):
-#     try:
-#         algod_client = get_algod_client()
-#         account_info = algod_client.account_info(address)
-#         balance = account_info['amount']
-#         return {
-#             "address": address, 
-#             "balance": balance, 
-#             "algos": balance / 1_000_000
-#         }
-#     except Exception as e:
-#         raise HTTPException(status_code=404, detail=str(e))
 
 
 
@@ -606,65 +665,3 @@ async def handle_bring_account_online():
 # from algosdk.v2client.algod import AlgodClient
 # from algosdk.v2client.indexer import IndexerClient
 # from algokit_utils import get_algod_client, get_indexer_client, get_account
-
-# # Configure logging
-# logging.basicConfig(level=logging.INFO)  # Set the logging level to INFO or DEBUG
-# logger = logging.getLogger(__name__)
-
-# app = FastAPI()
-
-# @app.post("/api/store-card")
-# async def store_smart_card(wallet_data: WalletData) -> ResponseData:
-#     try:
-#         logger.info("Received request to store smart card data: %s", wallet_data)
-
-#         # Validate input
-#         if not wallet_data.account_address.strip():
-#             logger.error("Invalid account address provided")
-#             raise ValueError("Invalid account address")
-        
-#         if not wallet_data.smart_card_number.isdigit() or len(wallet_data.smart_card_number) != 10:
-#             logger.error("Invalid smart card number format: %s", wallet_data.smart_card_number)
-#             raise ValueError("Smart card number must be exactly 10 digits")
-
-#         # Set up Algorand clients and account
-#         algod_client = get_algod_client()
-#         indexer_client = get_indexer_client()
-#         deployer = get_account(algod_client, "DEPLOYER", fund_with_algos=0)
-#         logger.info("Algorand clients and deployer account initialized")
-
-#         # Initialize the contract client
-#         app_client = PayRentSmartContractClient(
-#             algod_client=algod_client,
-#             creator=deployer,
-#             indexer_client=indexer_client
-#         )
-#         logger.info("Smart contract client initialized")
-
-#         # Interact with the smart contract method (e.g., store_card_data)
-#         app_client.store_card_data(
-#             account_address=wallet_data.account_address,
-#             smart_card_number=wallet_data.smart_card_number
-#         )
-#         logger.info("Smart card data stored successfully for account: %s", wallet_data.account_address)
-
-#         return ResponseData(
-#             status=True,
-#             message="Smart card data stored successfully on the blockchain",
-#             data={
-#                 "account_address": wallet_data.account_address,
-#                 "smart_card_number": wallet_data.smart_card_number
-#             }
-#         )
-#     except ValueError as ve:
-#         logger.error("Validation error: %s", str(ve))
-#         raise HTTPException(
-#             status_code=400,
-#             detail=str(ve)
-#         )
-#     except Exception as e:
-#         logger.exception("Failed to store smart card data: %s", str(e))
-#         raise HTTPException(
-#             status_code=500,
-#             detail="An error occurred while storing smart card data"
-#         )
