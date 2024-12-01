@@ -1,8 +1,10 @@
+#  pay_rent_smart_contract/deploy_config.py
+
 import logging
 import os
 from dotenv import load_dotenv
 import algokit_utils
-from algosdk import account, mnemonic
+from algosdk import account, mnemonic, logic
 from algosdk.v2client.algod import AlgodClient
 from algosdk.v2client.indexer import IndexerClient
 
@@ -18,8 +20,8 @@ def deploy(
     deployer: algokit_utils.Account,
 ) -> None:
     # Import the client
-    from smart_contracts.artifacts.pay_rent_smart_contract.pay_rent_smart_contract_client import (
-        PayRentSmartContractClient,
+    from smart_contracts.artifacts.pay_rent_smart_contract.smart_card_contract_client import (
+    SmartCardContractClient,
     )
 
     # Get credentials from environment variables
@@ -39,7 +41,7 @@ def deploy(
     )
 
     # Initialize the app client
-    app_client = PayRentSmartContractClient(
+    app_client = SmartCardContractClient(
         algod_client,
         creator=deployer,
         indexer_client=indexer_client,
@@ -51,15 +53,21 @@ def deploy(
         on_update=algokit_utils.OnUpdate.AppendApp,
     )
 
-    # Test the StoreSmartCardContract method
-    contract = StoreSmartCardContract()
-    
-    # Dummy smart card number (512-bit unsigned integer)
-    dummy_smart_card_number = UInt512(123456789012345678901234567890)
-    
-    # Dummy account address (Algorand addresses are 58 characters long)
-    dummy_account_address = Address("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    # After deploying the contract
+    app_id = app_client.app_id  # Assuming app_client has this attribute
+    app_address = logic.get_application_address(app_id)
 
-    # Call the function with dummy values
-    result = contract.store_smart_card_number(dummy_smart_card_number, dummy_account_address)
-    print(f"Storage successful: {result}")
+    print(f"Application ID: {app_id}")
+    print(f"Application Address: {app_address}")
+    # # Test the StoreSmartCardContract method
+    # contract = StoreSmartCardContract()
+    
+    # # Dummy smart card number (512-bit unsigned integer)
+    # dummy_smart_card_number = UInt512(123456789012345678901234567890)
+    
+    # # Dummy account address (Algorand addresses are 58 characters long)
+    # dummy_account_address = Address("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+    # # Call the function with dummy values
+    # result = contract.store_smart_card_number(dummy_smart_card_number, dummy_account_address)
+    # print(f"Storage successful: {result}")

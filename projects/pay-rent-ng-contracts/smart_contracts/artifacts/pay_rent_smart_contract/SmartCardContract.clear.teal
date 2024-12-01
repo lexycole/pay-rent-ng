@@ -1,0 +1,5 @@
+#pragma version 10
+
+smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.clear_state_program:
+    pushint 1 // 1
+    return

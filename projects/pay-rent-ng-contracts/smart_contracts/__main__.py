@@ -1,9 +1,12 @@
+# __main__.py
 import logging
 import sys
 from pathlib import Path
 import uvicorn
 from dotenv import load_dotenv
 
+
+from smart_contracts._helpers.api import app
 from smart_contracts._helpers.build import build
 from smart_contracts._helpers.config import contracts
 from smart_contracts._helpers.deploy import deploy
@@ -11,8 +14,8 @@ from smart_contracts._helpers.deploy import deploy
 # Uncomment the following lines to enable auto generation of AVM Debugger compliant sourcemap and simulation trace file.
 # Learn more about using AlgoKit AVM Debugger to debug your TEAL source codes and inspect various kinds of
 # Algorand transactions in atomic groups -> https://github.com/algorandfoundation/algokit-avm-vscode-debugger
-# from algokit_utils.config import config
-# config.configure(debug=True, trace_all=True)
+from algokit_utils.config import config
+config.configure(debug=True, trace_all=True)
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s %(levelname)-10s: %(message)s"
 )
@@ -33,6 +36,10 @@ def main(action: str, contract_name: str | None = None) -> None:
     ]
 
     match action:
+        case "serve":
+            logger.info("Starting FastAPI server...")
+            
+            uvicorn.run("smart_contracts._helpers.api:app", host="127.0.0.1", port=8000,  reload=True)
         case "build":
             for contract in filtered_contracts:
                 logger.info(f"Building app at {contract.path}")
@@ -54,11 +61,7 @@ def main(action: str, contract_name: str | None = None) -> None:
                 if contract.deploy:
                     logger.info(f"Deploying app {contract.name}")
                     deploy(app_spec_path, contract.deploy)
-        case "serve":
-            # Run FastAPI app directly via Uvicorn
-            logger.info("Starting FastAPI server...")
-            uvicorn.run("smart_contracts._helper.api:app", host="127.0.0.1", port=8000)
-
+        
 
         case "all":
             for contract in filtered_contracts:

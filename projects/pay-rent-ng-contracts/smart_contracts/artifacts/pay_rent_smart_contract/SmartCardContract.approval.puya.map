@@ -1,0 +1,536 @@
+{
+  "version": 3,
+  "sources": [
+    "../../pay_rent_smart_contract/contract.py"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAOA;;;AAAA;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;AAAA;AAAA;AAGK;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAKA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAKA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAbL;;AAAA;;;;;;;;;AAAA;AAAA;AAGA;;;AAGQ;AAAyB;AAAzB;;AAER;;;AAGe;AAAA;AAAA;AAAA;AAAP;AAER;;;AAGQ;AAAyB;AAAzB;AACO;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAP",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.approval_program",
+      "params": {},
+      "block": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.approval_program",
+      "stack_in": [],
+      "op": "intcblock 1 0"
+    },
+    "5": {
+      "op": "bytecblock \"SMART_CARD_NUMBER\" 0x151f7c75 0x000b3132333435363738393031"
+    },
+    "44": {
+      "callsub": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.__puya_arc4_router__",
+      "op": "callsub __puya_arc4_router__",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "47": {
+      "op": "return",
+      "stack_out": []
+    },
+    "48": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.__puya_arc4_router__",
+      "params": {},
+      "block": "__puya_arc4_router__",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "51": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "53": {
+      "op": "bz __puya_arc4_router___bare_routing@7",
+      "stack_out": []
+    },
+    "56": {
+      "op": "pushbytess 0x83f14748 0xdc48cdca 0x2622fa51 // method \"init()void\", method \"get_smart_card_number()string\", method \"save_smart_card_number()string\""
+    },
+    "73": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(get_smart_card_number()string)",
+        "Method(init()void)",
+        "Method(save_smart_card_number()string)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(init()void)",
+        "Method(get_smart_card_number()string)",
+        "Method(save_smart_card_number()string)",
+        "tmp%2#0"
+      ]
+    },
+    "76": {
+      "op": "match __puya_arc4_router___init_route@2 __puya_arc4_router___get_smart_card_number_route@3 __puya_arc4_router___save_smart_card_number_route@4",
+      "stack_out": []
+    },
+    "84": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "85": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "86": {
+      "block": "__puya_arc4_router___init_route@2",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "88": {
+      "op": "intc_0 // OptIn",
+      "defined_out": [
+        "OptIn",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "OptIn"
+      ]
+    },
+    "89": {
+      "op": "==",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "90": {
+      "error": "OnCompletion is not OptIn",
+      "op": "assert // OnCompletion is not OptIn",
+      "stack_out": []
+    },
+    "91": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "93": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "94": {
+      "callsub": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.init",
+      "op": "callsub init"
+    },
+    "97": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "98": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "99": {
+      "block": "__puya_arc4_router___get_smart_card_number_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "101": {
+      "op": "!",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "102": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "103": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "105": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "106": {
+      "callsub": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.get_smart_card_number",
+      "op": "callsub get_smart_card_number",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0"
+      ]
+    },
+    "109": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0",
+        "0x151f7c75"
+      ]
+    },
+    "110": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%11#0"
+      ]
+    },
+    "111": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "112": {
+      "op": "log",
+      "stack_out": []
+    },
+    "113": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "114": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "115": {
+      "block": "__puya_arc4_router___save_smart_card_number_route@4",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "117": {
+      "op": "!",
+      "defined_out": [
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%14#0"
+      ]
+    },
+    "118": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "119": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "121": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "122": {
+      "callsub": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.save_smart_card_number",
+      "op": "callsub save_smart_card_number",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
+    },
+    "125": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0",
+        "0x151f7c75"
+      ]
+    },
+    "126": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%17#0"
+      ]
+    },
+    "127": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%18#0"
+      ]
+    },
+    "128": {
+      "op": "log",
+      "stack_out": []
+    },
+    "129": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "130": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "131": {
+      "block": "__puya_arc4_router___bare_routing@7",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "133": {
+      "op": "bnz __puya_arc4_router___after_if_else@11",
+      "stack_out": []
+    },
+    "136": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0"
+      ]
+    },
+    "138": {
+      "op": "!",
+      "defined_out": [
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%21#0"
+      ]
+    },
+    "139": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "140": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "141": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "142": {
+      "block": "__puya_arc4_router___after_if_else@11",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "143": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "144": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.init",
+      "params": {},
+      "block": "init",
+      "stack_in": [],
+      "op": "proto 0 0"
+    },
+    "147": {
+      "op": "bytec_0 // \"SMART_CARD_NUMBER\"",
+      "defined_out": [
+        "\"SMART_CARD_NUMBER\""
+      ],
+      "stack_out": [
+        "\"SMART_CARD_NUMBER\""
+      ]
+    },
+    "148": {
+      "op": "bytec_2 // 0x000b3132333435363738393031",
+      "defined_out": [
+        "\"SMART_CARD_NUMBER\"",
+        "0x000b3132333435363738393031"
+      ],
+      "stack_out": [
+        "\"SMART_CARD_NUMBER\"",
+        "0x000b3132333435363738393031"
+      ]
+    },
+    "149": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "150": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "151": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.get_smart_card_number",
+      "params": {},
+      "block": "get_smart_card_number",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "154": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "155": {
+      "op": "bytec_0 // \"SMART_CARD_NUMBER\"",
+      "defined_out": [
+        "\"SMART_CARD_NUMBER\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"SMART_CARD_NUMBER\""
+      ]
+    },
+    "156": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "157": {
+      "error": "check self.SMART_CARD_NUMBER exists",
+      "op": "assert // check self.SMART_CARD_NUMBER exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "158": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "159": {
+      "subroutine": "smart_contracts.pay_rent_smart_contract.contract.SmartCardContract.save_smart_card_number",
+      "params": {},
+      "block": "save_smart_card_number",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "162": {
+      "op": "bytec_0 // \"SMART_CARD_NUMBER\"",
+      "defined_out": [
+        "\"SMART_CARD_NUMBER\""
+      ],
+      "stack_out": [
+        "\"SMART_CARD_NUMBER\""
+      ]
+    },
+    "163": {
+      "op": "bytec_2 // 0x000b3132333435363738393031",
+      "defined_out": [
+        "\"SMART_CARD_NUMBER\"",
+        "0x000b3132333435363738393031"
+      ],
+      "stack_out": [
+        "\"SMART_CARD_NUMBER\"",
+        "0x000b3132333435363738393031"
+      ]
+    },
+    "164": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "165": {
+      "op": "pushbytes 0x0025536d6172742063617264206e756d626572207361766564207375636365737366756c6c792e",
+      "defined_out": [
+        "0x0025536d6172742063617264206e756d626572207361766564207375636365737366756c6c792e"
+      ],
+      "stack_out": [
+        "0x0025536d6172742063617264206e756d626572207361766564207375636365737366756c6c792e"
+      ]
+    },
+    "206": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

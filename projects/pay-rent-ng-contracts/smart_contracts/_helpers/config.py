@@ -1,3 +1,4 @@
+# _helpers/config.py
 import dataclasses
 import importlib
 from collections.abc import Callable
@@ -6,7 +7,6 @@ from pathlib import Path
 from algokit_utils import Account, ApplicationSpecification
 from algosdk.v2client.algod import AlgodClient
 from algosdk.v2client.indexer import IndexerClient
-
 
 @dataclasses.dataclass
 class SmartContract:
@@ -58,4 +58,4 @@ contracts = [
     )
     for folder in base_dir.iterdir()
     if folder.is_dir() and has_contract_file(folder)
-]
+] 
