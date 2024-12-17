@@ -40,7 +40,6 @@ Demonstration of functionalities running locally on the Testnet using Pera Walle
 
 
 # Pera Algo Wallet Demo
-<img src="https://github.com/user-attachments/assets/b3ac04de-903e-42fa-ab04-183c2c27da29.png" width="600" height="600">
 ![IMG_6168](https://github.com/user-attachments/assets/b3ac04de-903e-42fa-ab04-183c2c27da29)
 ![IMG_6169](https://github.com/user-attachments/assets/1048a42d-5db6-4e14-8ca1-0dddc23128e6)
 ![IMG_6170](https://github.com/user-attachments/assets/11693648-ffd4-499e-b373-0f39f8cc9c7c)
