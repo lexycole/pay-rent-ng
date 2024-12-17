@@ -40,13 +40,15 @@ Demonstration of functionalities running locally on the Testnet using Pera Walle
 
 
 # Pera Algo Wallet Demo
-<img src="https://github.com/user-attachments/assets/2735a617-a9f2-4e7f-b5d2-7edc740beb47" alt="HOME SCREEN" width=550" height="600">
-<img src="https://github.com/user-attachments/assets/daae4230-b032-426d-aa0e-ae7ed43fb796" alt="NOTIFICATION SCREEN" width=550" height="600">
-<img src="https://github.com/user-attachments/assets/1df89f23-efee-4ea9-a2ea-b959fea4b5db" alt="AlgoKit - lora SCREEN" width=550" height="600">
-<img src="https://github.com/user-attachments/assets/6612ee6e-b31d-4bba-b672-595d7eb2b673" alt="HISTORY SCREEN" width=550" height="600">
-<img src="https://github.com/user-attachments/assets/31b7624b-3284-4990-865f-65f318c134e8" alt="MORE HISTORY SCREEN" width=550" height="600">
-<img src="https://github.com/user-attachments/assets/d8576828-14e3-425a-b1d1-9191665ec4f8" alt="MORE HISTORY SCREEN" width=550" height="600">
-<img src="https://github.com/user-attachments/assets/a92156e0-5b35-481e-b3bf-2fc0879ce44c" alt="ACCOUNT TYPE SCREEN" width=550" height="600">
+<img src="https://github.com/user-attachments/assets/b3ac04de-903e-42fa-ab04-183c2c27da29.png" width="600" height="600">
+![IMG_6168](https://github.com/user-attachments/assets/b3ac04de-903e-42fa-ab04-183c2c27da29)
+![IMG_6169](https://github.com/user-attachments/assets/1048a42d-5db6-4e14-8ca1-0dddc23128e6)
+![IMG_6170](https://github.com/user-attachments/assets/11693648-ffd4-499e-b373-0f39f8cc9c7c)
+![IMG_6173](https://github.com/user-attachments/assets/b1eeef89-3e27-4ff2-8deb-56f022a57192)
+![IMG_6174](https://github.com/user-attachments/assets/9669ed5e-dd36-48f7-b05b-1484997bfa35)
+![IMG_6175](https://github.com/user-attachments/assets/25aa75b2-bc3e-4050-b3e5-365df723cb01)
+![IMG_6176](https://github.com/user-attachments/assets/e14ff976-67fb-421e-b300-2dd5bcc2b1dd)
+
 
 
 # Video Demo
