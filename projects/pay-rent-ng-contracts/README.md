@@ -40,18 +40,17 @@ Demonstration of functionalities running locally on the Testnet using Pera Walle
 
 
 # Pera Algo Wallet Demo
-<!-- ![HOME SCREEN](IMG_6168.png) -->
-<img src="IMG_6176.png" alt="ACCOUNT TYPE SCREEN" width="600" height="400">
-![NOTIFICATION SCREEN](IMG_6169.png) 
-![AlgoKit - lora SCREEN](IMG_6170.png) 
-![HISTORY SCREEN](IMG_6173.png) 
-![MORE HISTORY SCREEN](IMG_6174.png) 
-![MORE HISTORY SCREEN](IMG_6175-1.png) 
-![ACCOUNT TYPE SCREEN](IMG_6176.png)
-
+<img src="IMG_6178.png" alt="HOME SCREEN" width=550" height="600">
+<img src="IMG_6179.png" alt="NOTIFICATION SCREEN" width=550" height="600">
+<img src="IMG_6170.png" alt="AlgoKit - lora SCREEN" width=550" height="600">
+<img src="IMG_6173.png" alt="HISTORY SCREEN" width=550" height="600">
+<img src="IMG_6174.png" alt="MORE HISTORY SCREEN" width=550" height="600">
+<img src="IMG_6175-1.png" alt="MORE HISTORY SCREEN" width=550" height="600">
+<img src="IMG_6176.png" alt="ACCOUNT TYPE SCREEN" width=550" height="600">
 
 # Video Demo
-[Pay rent smart contract video demo](<../../../../../../Desktop/Screenshots/Screen Recording 2024-12-17 at 11.49.58.mov>)
+https://github.com/user-attachments/assets/57328660-2d1a-4bc2-9d89-dca3a9100a74
+
 
 
 
