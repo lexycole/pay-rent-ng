@@ -3,6 +3,7 @@
 This project has been generated using AlgoKit. 
 
 # Demo 
+
 Demonstration of functionalities running locally on the Testnet using Pera Wallet.
 
 1. **Activate Virtual Environment**: Initialize the virtual environment using the command:  ```poetry shell```
@@ -39,13 +40,20 @@ Demonstration of functionalities running locally on the Testnet using Pera Walle
 
 
 # Pera Algo Wallet Demo
-![hOME SCREEN](IMG_6168.png)
+<!-- ![HOME SCREEN](IMG_6168.png) -->
+<img src="IMG_6176.png" alt="ACCOUNT TYPE SCREEN" width="600" height="400">
 ![NOTIFICATION SCREEN](IMG_6169.png) 
 ![AlgoKit - lora SCREEN](IMG_6170.png) 
 ![HISTORY SCREEN](IMG_6173.png) 
 ![MORE HISTORY SCREEN](IMG_6174.png) 
 ![MORE HISTORY SCREEN](IMG_6175-1.png) 
 ![ACCOUNT TYPE SCREEN](IMG_6176.png)
+
+
+# Video Demo
+[Pay rent smart contract video demo](<../../../../../../Desktop/Screenshots/Screen Recording 2024-12-17 at 11.49.58.mov>)
+
+
 
 
 
