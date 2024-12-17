@@ -1,26 +1,61 @@
 # pay-rent-ng-contracts
 
-This project has been generated using AlgoKit. See below for default getting started instructions.
+This project has been generated using AlgoKit. 
 
-# Setup
+# Demo 
+Demonstration of functionalities running locally on the Testnet using Pera Wallet.
+
+1. **Activate Virtual Environment**: Initialize the virtual environment using the command:  ```poetry shell```
+
+2. **Launch Lora the Explorer**:  Open Lora the Explorer with the following command:  `algokit explore`
+
+3. **Build Smart Contracts**: Build the contracts by executing: ` poetry run python -m smart_contracts build`
+
+4. **Deploy Generated Artifacts to Lora**: Open Lora the Explorer.
+   -  Connect your Pera Wallet:
+   -  Select Testnet (not Localnet).
+   -  Click Connect Pera Wallet.
+   -  On your mobile device, scan the Pera QR code displayed on Lora the Explorer.
+   -  🎉 Success: Your smart contract is now deployed to the Algorand blockchain network.
+
+5. **Test Deployed Smart Contract Using FastAPI on Postman**: 
+   -  Start FastAPI Server
+      Run the FastAPI server with the following command: `uvicorn smart_contracts._helpers.api:app --reload`
+   - API Endpoints:
+      - Retrieve Customer Smart Card Number/IUC (GET request):
+         GET {{BASE_URL}}/smart-card-number
+         Retrieves the customer smart card number or IUC saved on the Algorand blockchain.
+
+      -  Save Customer Smart Card Number/IUC (POST request):
+         -  POST {{BASE_URL}}/set-smart-card-number/?smart_card_number="your_smart_card_number_or_iuc"
+         -  Saves the customer smart card number or IUC to the Algorand blockchain network.
+
+   -  Additional Endpoints:
+      -  Reactivate and Fund: {{BASE_URL}}/reactivate-and-fund/address=<your-address>&amount=<micro-algos-fund>
+      
+      - Send Algos: {{BASE_URL}}/send-algos/recipient_address=<your-address>&amount=<your-amount>
+      
+      - Bring Account Online: {{BASE_URL}}/bring-account-online/
+
+
+# Pera Algo Wallet Demo
+![hOME SCREEN](IMG_6168.png)
+![NOTIFICATION SCREEN](IMG_6169.png) 
+![AlgoKit - lora SCREEN](IMG_6170.png) 
+![HISTORY SCREEN](IMG_6173.png) 
+![MORE HISTORY SCREEN](IMG_6174.png) 
+![MORE HISTORY SCREEN](IMG_6175-1.png) 
+![ACCOUNT TYPE SCREEN](IMG_6176.png)
+
+
+
+
+# Development Setup
 
 ### Pre-requisites
-
 - [Python 3.12](https://www.python.org/downloads/) or later
 - [Docker](https://www.docker.com/) (only required for LocalNet)
 
-> For interactive tour over the codebase, download [vsls-contrib.codetour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) extension for VS Code, then open the [`.codetour.json`](./.tours/getting-started-with-your-algokit-project.tour) file in code tour extension.
-
-### Initial Setup
-
-#### 1. Clone the Repository
-Start by cloning this repository to your local machine.
-
-#### 2. Install Pre-requisites
-Ensure the following pre-requisites are installed and properly configured:
-
-- **Docker**: Required for running a local Algorand network. [Install Docker](https://www.docker.com/).
-- **AlgoKit CLI**: Essential for project setup and operations. Install the latest version from [AlgoKit CLI Installation Guide](https://github.com/algorandfoundation/algokit-cli#install). Verify installation with `algokit --version`, expecting `2.0.0` or later.
 
 #### 3. Bootstrap Your Local Environment
 Run the following commands within the project folder:
@@ -36,7 +71,7 @@ Run the following commands within the project folder:
 Directly manage and interact with your project using AlgoKit commands:
 
 1. **Build Contracts**: `algokit project run build` compiles all smart contracts. You can also specify a specific contract by passing the name of the contract folder as an extra argument.
-For example: `algokit project run build -- hello_world` will only build the `hello_world` contract.
+For example: `algokit project run build -- pay-rent-ng-contracts` or ` poetry run python -m smart_contracts build` will only build the `smart_contracts` contract.
 2. **Deploy**: Use `algokit project deploy localnet` to deploy contracts to the local network. You can also specify a specific contract by passing the name of the contract folder as an extra argument.
 For example: `algokit project deploy localnet -- hello_world` will only deploy the `hello_world` contract.
 
@@ -49,12 +84,7 @@ For a seamless experience with breakpoint debugging and other features:
    - Use `F5` to start debugging.
    - **Windows Users**: Select the Python interpreter at `./.venv/Scripts/python.exe` via `Ctrl/Cmd + Shift + P` > `Python: Select Interpreter` before the first run.
 
-#### JetBrains IDEs
-While primarily optimized for VS Code, JetBrains IDEs are supported:
 
-1. **Open Project**: In your JetBrains IDE, open the repository root.
-2. **Automatic Setup**: The IDE should configure the Python interpreter and virtual environment.
-3. **Debugging**: Use `Shift+F10` or `Ctrl+R` to start debugging. Note: Windows users may encounter issues with pre-launch tasks due to a known bug. See [JetBrains forums](https://youtrack.jetbrains.com/issue/IDEA-277486/Shell-script-configuration-cannot-run-as-before-launch-task) for workarounds.
 
 ## AlgoKit Workspaces and Project Management
 This project supports both standalone and monorepo setups through AlgoKit workspaces. Leverage [`algokit project run`](https://github.com/algorandfoundation/algokit-cli/blob/main/docs/features/project/run.md) commands for efficient monorepo project orchestration and management across multiple projects within a workspace.
@@ -65,13 +95,13 @@ This template provides a set of [algokit generators](https://github.com/algorand
 
 ### Generate Smart Contract 
 
-By default the template creates a single `HelloWorld` contract under pay_rent_smart_contract folder in the `smart_contracts` directory. To add a new contract:
+By default the template creates a single `pay-rent-ng-contracts` contract under pay_rent_smart_contract folder in the `smart_contracts` directory. To add a new contract:
 
-1. From the root of the project (`../`) execute `algokit generate smart-contract`. This will create a new starter smart contract and deployment configuration file under `{your_contract_name}` subfolder in the `smart_contracts` directory.
+1. From the root of the project (`../`) execute `algokit generate smart-contract`. This will create a new starter smart contract and deployment configuration file under `{pay-rent-ng-contracts}` subfolder in the `smart_contracts` directory.
 2. Each contract potentially has different creation parameters and deployment steps. Hence, you need to define your deployment logic in `deploy_config.py`file.
 3. `config.py` file will automatically build all contracts in the `smart_contracts` directory. If you want to build specific contracts manually, modify the default code provided by the template in `config.py` file.
 
-> Please note, above is just a suggested convention tailored for the base configuration and structure of this template. The default code supplied by the template in `config.py` and `index.ts` (if using ts clients) files are tailored for the suggested convention. You are free to modify the structure and naming conventions as you see fit.
+
 
 ### Generate '.env' files
 

@@ -5,9 +5,6 @@ import json
 import os
 import base64
 import algokit_utils
-import base64
-import logging
-import os
 import traceback
 from typing import List
 from fastapi import FastAPI, HTTPException, Query
@@ -17,6 +14,8 @@ from algosdk.transaction import Transaction, SignedTransaction
 from dotenv import load_dotenv
 from algosdk import mnemonic, transaction
 from pydantic import BaseModel
+from algosdk.v2client.indexer import IndexerClient
+
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)-10s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -102,7 +101,6 @@ def check_application_exists(algod_client, app_id):
     except Exception as e:
         logger.error(f"Application {app_id} does not exist: {e}")
         return False
-
 
 
 def reactivate_account(algod_client, sender_address, private_key):
@@ -342,21 +340,6 @@ async def get_smart_card_number():
         logger.error(f"Error fetching smart card number: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
-import logging
-import json
-import os
-import base64
-import algokit_utils
-import traceback
-from typing import List
-from fastapi import FastAPI, HTTPException, Query
-from algosdk.v2client import algod
-from algosdk.v2client.indexer import IndexerClient
-from algosdk.transaction import Transaction, SignedTransaction
-from dotenv import load_dotenv
-from algosdk import mnemonic, transaction
-from pydantic import BaseModel
-
 
 @app.post("/set-smart-card-number")
 async def set_smart_card_number(smart_card_number: str = Query(..., description="Smart Card Number to set")):
@@ -506,7 +489,6 @@ async def send_algos(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
 def generate_participation_keys():
     """
     Generate participation keys for bringing an account online
@@ -645,23 +627,3 @@ async def handle_bring_account_online():
         logger.error(f"Error bringing account online: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # Imports (add these at the top of your file)
-# import logging
-# from fastapi import FastAPI, HTTPException
-# from smart_contracts.artifacts.pay_rent_smart_contract.pay_rent_smart_contract_client import PayRentSmartContractClient
-# from algosdk.v2client.algod import AlgodClient
-# from algosdk.v2client.indexer import IndexerClient
-# from algokit_utils import get_algod_client, get_indexer_client, get_account
